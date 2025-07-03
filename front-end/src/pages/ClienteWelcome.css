@@ -1,7 +1,9 @@
 .cliente-welcome-container {
   padding: 40px;
   text-align: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(-45deg, #B84665, #764ba2, #667eea, #5a67d8);
+  background-size: 400% 400%;
+  animation: gradientWave 8s ease infinite;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,6 +11,58 @@
   align-items: center;
   font-family: 'Pixelify Sans', 'PixelSans', monospace;
   color: white;
+  position: relative;
+}
+
+.cliente-welcome-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../assets/fundo.svg');
+  background-size: 100px 100px;
+  background-blend-mode: difference;
+  opacity: 0.12;
+  animation: patternMove 25s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cliente-welcome-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes gradientWave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes patternMove {
+  0% {
+    background-position: 0 0;
+  }
+  25% {
+    background-position: 50px -50px;
+  }
+  50% {
+    background-position: 100px 0;
+  }
+  75% {
+    background-position: 50px 50px;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
 
 .cliente-welcome-logo {
@@ -19,6 +73,16 @@
   margin: 0 auto 30px auto;
   display: block;
   filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.3));
+  animation: logoFloat 6s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
 }
 
 .cliente-welcome-title {
@@ -57,12 +121,33 @@
   border: 2px solid rgba(251, 213, 210, 0.3);
   backdrop-filter: blur(10px);
   min-width: 150px;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  animation: floatGlow 4s ease-in-out infinite;
+}
+
+.feature-item:nth-child(2) {
+  animation-delay: 1.3s;
+}
+
+.feature-item:nth-child(3) {
+  animation-delay: 2.6s;
 }
 
 .feature-item:hover {
-  transform: translateY(-5px);
-  background: rgba(255,255,255,0.15);
+  transform: translateY(-8px) scale(1.05);
+  background: rgba(255,255,255,0.2);
+  box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+}
+
+@keyframes floatGlow {
+  0%, 100% {
+    transform: translateY(0px);
+    box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+  }
+  50% {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(255,255,255,0.2);
+  }
 }
 
 .feature-icon {
