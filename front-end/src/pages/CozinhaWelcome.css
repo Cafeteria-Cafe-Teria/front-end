@@ -1,9 +1,8 @@
 .cozinha-welcome-container {
   padding: 40px;
   text-align: center;
-  background: linear-gradient(-45deg, #ff7e5f, #feb47b, #ff6b6b, #feca57);
+  background-color: #46B89E;
   background-size: 400% 400%;
-  animation: gradientWave 6s ease infinite;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -14,33 +13,38 @@
   position: relative;
 }
 
-@keyframes gradientWave {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.cozinha-welcome-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../assets/fundo.svg');
+  background-size: 100px 100px;
+  mix-blend-mode: multiply;
+  animation: patternMove 25s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cozinha-welcome-container > * {
+  position: relative;
+  z-index: 2;
 }
 
 @keyframes patternMove {
   0% {
     background-position: 0 0;
   }
-  20% {
-    background-position: -30px 30px;
+  25% {
+    background-position: 50px -50px;
   }
-  40% {
-    background-position: 30px 60px;
+  50% {
+    background-position: 100px 0;
   }
-  60% {
-    background-position: 60px 30px;
-  }
-  80% {
-    background-position: 30px -30px;
+  75% {
+    background-position: 50px 50px;
   }
   100% {
     background-position: 0 0;
@@ -48,14 +52,14 @@
 }
 
 .cozinha-welcome-logo {
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 250px;
+  max-height: 250px;
   width: auto;
   height: auto;
   margin: 0 auto 30px auto;
   display: block;
   filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.3));
-  animation: logoFloat 5s ease-in-out infinite;
+  animation: logoFloat 6s ease-in-out infinite;
 }
 
 @keyframes logoFloat {
@@ -63,14 +67,14 @@
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-15px) rotate(-2deg);
+    transform: translateY(-15px) rotate(2deg);
   }
 }
 
 .cozinha-welcome-title {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #FBD5D2;
+  color: #EDE3E3;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   font-family: 'Pixelify Sans', 'PixelSans', monospace;
 }
@@ -78,12 +82,11 @@
 .cozinha-welcome-subtitle {
   font-size: 1.2rem;
   margin-bottom: 40px;
-  color: #2C1810;
+  color: #E8E8E8;
   max-width: 600px;
   line-height: 1.6;
   font-family: 'Pixelify Sans', 'PixelSans', monospace;
-  text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
-  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 .cozinha-welcome-features {
@@ -98,15 +101,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.1);
   padding: 20px;
   border-radius: 12px;
-  border: 2px solid rgba(44, 24, 16, 0.3);
+  border: 2px solid rgba(251, 213, 210, 0.3);
   backdrop-filter: blur(10px);
   min-width: 150px;
   transition: all 0.3s ease;
-  color: #2C1810;
-  font-weight: bold;
   animation: floatGlow 4s ease-in-out infinite;
 }
 
@@ -120,18 +121,18 @@
 
 .feature-item:hover {
   transform: translateY(-8px) scale(1.05);
-  background: rgba(255,255,255,0.25);
-  box-shadow: 0 10px 25px rgba(255,165,0,0.3);
+  background: rgba(255,255,255,0.2);
+  box-shadow: 0 10px 25px rgba(255,255,255,0.2);
 }
 
 @keyframes floatGlow {
   0%, 100% {
     transform: translateY(0px);
-    box-shadow: 0 5px 15px rgba(255,165,0,0.1);
+    box-shadow: 0 5px 15px rgba(255,255,255,0.1);
   }
   50% {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(255,165,0,0.2);
+    box-shadow: 0 15px 30px rgba(255,255,255,0.2);
   }
 }
 
@@ -149,39 +150,29 @@
 
 .cozinha-welcome-button {
   display: inline-block;
-  padding: 18px 35px;
+  width: 220px;
+  height: 100px;
   text-decoration: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
   font-family: 'Pixelify Sans', 'PixelSans', monospace;
   transition: all 0.3s ease;
-  border: 3px solid transparent;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  background: url('../assets/botao2.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #780A01;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.cozinha-welcome-button.primary {
-  background-color: #dc3545;
-  color: white;
-  border-color: #2C1810;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-.cozinha-welcome-button.primary:hover {
-  background-color: #c82333;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}
-
-.cozinha-welcome-button.secondary {
-  background-color: transparent;
-  color: #2C1810;
-  border-color: #2C1810;
-}
-
-.cozinha-welcome-button.secondary:hover {
-  background-color: rgba(44, 24, 16, 0.1);
-  transform: translateY(-2px);
+.cozinha-welcome-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  filter: brightness(1.1) drop-shadow(0 8px 16px rgba(0,0,0,0.3));
 }
 
 .cozinha-welcome-container::before {
@@ -192,9 +183,9 @@
   right: 0;
   bottom: 0;
   background: url('../assets/fundo.svg');
-  background-size: 95px 95px;
-  opacity: 0.15;
-  animation: patternMove 18s linear infinite;
+  background-size: 100px 100px;
+  opacity: 0.25;
+  animation: patternMove 25s linear infinite;
   pointer-events: none;
   z-index: 1;
 }

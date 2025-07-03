@@ -2,65 +2,113 @@
   padding: 40px;
   text-align: center;
   background-color: #759829;
+  background-size: 400% 400%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: 'Pixelify Sans', 'PixelSans', monospace;
+  position: relative;
+}
+
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../assets/fundo.svg');
+  background-size: 100px 100px;
+  opacity: 0.25;
+  animation: patternMove 25s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.home-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes patternMove {
+  0% {
+    background-position: 0 0;
+  }
+  25% {
+    background-position: 50px -50px;
+  }
+  50% {
+    background-position: 100px 0;
+  }
+  75% {
+    background-position: 50px 50px;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
 
 .home-logo {
-  max-width: 300px;
-  max-height: 300px;
+  max-width: 250px;
+  max-height: 250px;
   width: auto;
   height: auto;
   margin: 0 auto 30px auto;
   display: block;
   filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.3));
+  animation: logoFloat 6s ease-in-out infinite;
 }
 
-.home-title {
-  margin-bottom: 30px;
-  font-size: 2.5rem;
-  color: #333;
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
 }
 
 .home-subtitle {
-  font-size: 1rem;
+  font-size: 1.4rem;
   margin-bottom: 40px;
-  color: #FBD5D2;
+  color: #EDE3E3;
+  max-width: 600px;
+  line-height: 1.6;
   font-family: 'Pixelify Sans', 'PixelSans', monospace;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 .home-buttons-container {
   display: flex;
   justify-content: center;
-  gap: 20px;
   flex-wrap: wrap;
 }
 
 .home-button {
   display: inline-block;
-  padding: 20px 40px;
-  margin: 20px;
-  background-color: #007bff;
-  color: white;
+  width: 220px;
+  height: 100px;
   text-decoration: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
   font-family: 'Pixelify Sans', 'PixelSans', monospace;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border: 3px solid #FBD5D2;
+  transition: all 0.3s ease;
+  background: url('../assets/botao2.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #780A01;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .home-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  border-color: #FBD5D2;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  transform: translateY(-3px) scale(1.05);
+  filter: brightness(1.1) drop-shadow(0 8px 16px rgba(0,0,0,0.3));
 }

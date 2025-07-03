@@ -1,9 +1,8 @@
 .cliente-welcome-container {
   padding: 40px;
   text-align: center;
-  background: linear-gradient(-45deg, #B84665, #764ba2, #667eea, #5a67d8);
+  background-color: #B84665;
   background-size: 400% 400%;
-  animation: gradientWave 8s ease infinite;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -23,8 +22,7 @@
   bottom: 0;
   background: url('../assets/fundo.svg');
   background-size: 100px 100px;
-  background-blend-mode: difference;
-  opacity: 0.12;
+  opacity: 0.25;
   animation: patternMove 25s linear infinite;
   pointer-events: none;
   z-index: 1;
@@ -35,17 +33,6 @@
   z-index: 2;
 }
 
-@keyframes gradientWave {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
 
 @keyframes patternMove {
   0% {
@@ -66,8 +53,8 @@
 }
 
 .cliente-welcome-logo {
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 250px;
+  max-height: 250px;
   width: auto;
   height: auto;
   margin: 0 auto 30px auto;
@@ -88,7 +75,7 @@
 .cliente-welcome-title {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #FBD5D2;
+  color: #EDE3E3;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   font-family: 'Pixelify Sans', 'PixelSans', monospace;
 }
@@ -164,39 +151,29 @@
 
 .cliente-welcome-button {
   display: inline-block;
-  padding: 18px 35px;
+  width: 220px;
+  height: 100px;
   text-decoration: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
   font-family: 'Pixelify Sans', 'PixelSans', monospace;
   transition: all 0.3s ease;
-  border: 3px solid transparent;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  background: url('../assets/botao2.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #780A01;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.cliente-welcome-button.primary {
-  background-color: #28a745;
-  color: white;
-  border-color: #FBD5D2;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-.cliente-welcome-button.primary:hover {
-  background-color: #218838;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}
-
-.cliente-welcome-button.secondary {
-  background-color: transparent;
-  color: #FBD5D2;
-  border-color: #FBD5D2;
-}
-
-.cliente-welcome-button.secondary:hover {
-  background-color: rgba(251, 213, 210, 0.1);
-  transform: translateY(-2px);
+.cliente-welcome-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  filter: brightness(1.1) drop-shadow(0 8px 16px rgba(0,0,0,0.3));
 }
 
 @media (max-width: 768px) {

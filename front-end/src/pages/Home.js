@@ -13,11 +13,11 @@ const Home = () => {
       
       <div className="home-buttons-container">
         <Link to="/cliente" className="home-button">
-          🍽️ Área do Cliente
+          Área do Cliente
         </Link>
         
         <Link to="/cozinha" className="home-button">
-          👨‍🍳 Área da Cozinha
+          Área da Cozinha
         </Link>
       </div>
     </div>
