@@ -1,0 +1,130 @@
+.cliente-welcome-container {
+  padding: 40px;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Pixelify Sans', 'PixelSans', monospace;
+  color: white;
+}
+
+.cliente-welcome-logo {
+  max-width: 200px;
+  max-height: 200px;
+  width: auto;
+  height: auto;
+  margin: 0 auto 30px auto;
+  display: block;
+  filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.3));
+}
+
+.cliente-welcome-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #FBD5D2;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  font-family: 'Pixelify Sans', 'PixelSans', monospace;
+}
+
+.cliente-welcome-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #E8E8E8;
+  max-width: 600px;
+  line-height: 1.6;
+  font-family: 'Pixelify Sans', 'PixelSans', monospace;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.cliente-welcome-features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid rgba(251, 213, 210, 0.3);
+  backdrop-filter: blur(10px);
+  min-width: 150px;
+  transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+  background: rgba(255,255,255,0.15);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.cliente-welcome-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cliente-welcome-button {
+  display: inline-block;
+  padding: 18px 35px;
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Pixelify Sans', 'PixelSans', monospace;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.cliente-welcome-button.primary {
+  background-color: #28a745;
+  color: white;
+  border-color: #FBD5D2;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.cliente-welcome-button.primary:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.cliente-welcome-button.secondary {
+  background-color: transparent;
+  color: #FBD5D2;
+  border-color: #FBD5D2;
+}
+
+.cliente-welcome-button.secondary:hover {
+  background-color: rgba(251, 213, 210, 0.1);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .cliente-welcome-features {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .cliente-welcome-title {
+    font-size: 2rem;
+  }
+  
+  .cliente-welcome-subtitle {
+    font-size: 1rem;
+  }
+}

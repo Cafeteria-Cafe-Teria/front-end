@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap');
+
+/* Caso tenha o arquivo da fonte PixelSans local, descomente e ajuste o caminho:
+@font-face {
+  font-family: 'PixelSans';
+  src: url('./assets/fonts/PixelSans.woff2') format('woff2'),
+       url('./assets/fonts/PixelSans.woff') format('woff'),
+       url('./assets/fonts/PixelSans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+*/
+
+body {
+  margin: 0;
+  font-family: 'Pixelify Sans', 'PixelSans', monospace, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
