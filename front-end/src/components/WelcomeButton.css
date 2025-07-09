@@ -1,0 +1,43 @@
+.welcome-button {
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  
+  /* Estilos de fonte e cor movidos do ClienteWelcome.css */
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  font-family: 'Pixelify Sans', 'PixelSans', monospace;
+  color: #780A01;
+  width: 220px;
+  height: 100px;
+}
+
+.welcome-button:hover {
+  text-decoration: none;
+  transform: translateY(-3px) scale(1.05);
+  filter: brightness(1.1) drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+}
+
+.welcome-button:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+.welcome-button:visited {
+  text-decoration: none !important;
+}
+
+.welcome-button:link {
+  text-decoration: none !important;
+}
+
+.welcome-button:active {
+  text-decoration: none !important;
+}

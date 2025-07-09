@@ -1,3 +1,6 @@
+* {
+  text-decoration: none;
+}
 .cliente-welcome-container {
   padding: 40px;
   text-align: center;
@@ -55,6 +58,17 @@
 .cliente-welcome-logo {
   max-width: 250px;
   max-height: 250px;
+  width: auto;
+  height: auto;
+  margin: 0 auto 30px auto;
+  display: block;
+  filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.3));
+  animation: logoFloat 6s ease-in-out infinite;
+}
+
+.cliente-welcome-logo2{
+  max-width: 120px;
+  max-height: 120px;
   width: auto;
   height: auto;
   margin: 0 auto 30px auto;
@@ -152,18 +166,12 @@
 .cliente-welcome-button {
   display: inline-block;
   width: 220px;
-  height: 100px;
-  text-decoration: none;
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   font-family: 'Pixelify Sans', 'PixelSans', monospace;
   transition: all 0.3s ease;
-  background: url('../assets/botao2.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
   color: #780A01;
   border: none;
   display: flex;

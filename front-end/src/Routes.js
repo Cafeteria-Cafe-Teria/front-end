@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import ClienteWelcome from './pages/ClienteWelcome';
 import CozinhaWelcome from './pages/CozinhaWelcome';
-import Cliente from './pages/Cliente';
+import Cliente from './pages/ClienteAdicionar';
 import Cozinha from './pages/Cozinha';
 import NotFound from './pages/NotFound';
 

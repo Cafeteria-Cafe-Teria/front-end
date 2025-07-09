@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './CozinhaWelcome.css';
 import logo from '../assets/LOGO.svg';
+import WelcomeButton from '../components/WelcomeButton';
 
 const CozinhaWelcome = () => {
   return (
@@ -9,8 +10,11 @@ const CozinhaWelcome = () => {
       <h1 className="cozinha-welcome-title">Cozinha do</h1>
       <img src={logo} alt="Logo do Restaurante" className="cozinha-welcome-logo" />
       <div className="cozinha-welcome-buttons">
-        <Link to="/cozinha/dashboard" className="cozinha-welcome-button primary">
-          Prepare pedidos!
+        <Link to="/cozinha/dashboard">
+          <WelcomeButton 
+            type="botao2" 
+            text="Prepare pedidos!" 
+          />
         </Link>
       </div>
     </div>
