@@ -10,7 +10,7 @@ const CozinhaWelcome = () => {
       <h1 className="cozinha-welcome-title">Cozinha do</h1>
       <img src={logo} alt="Logo do Restaurante" className="cozinha-welcome-logo" />
       <div className="cozinha-welcome-buttons">
-        <Link to="/cozinha/dashboard">
+        <Link to="/cozinha/bebida">
           <WelcomeButton 
             type="botao2" 
             text="Prepare pedidos!" 
