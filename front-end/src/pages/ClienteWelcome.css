@@ -156,13 +156,6 @@
   margin-bottom: 10px;
 }
 
-.cliente-welcome-buttons {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 .cliente-welcome-button {
   display: inline-block;
   width: 220px;

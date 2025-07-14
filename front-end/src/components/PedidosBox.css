@@ -1,0 +1,215 @@
+.pedidos-box {
+  background: url('../assets/caixa3.svg') no-repeat center center;
+  background-size: contain;
+  width: 100%;
+  max-width: 480px;
+  height: 400px;
+  overflow: hidden; /* CRÍTICO: garante que nada vaze */
+  transition: all 0.3s ease;
+  position: relative;
+  /* Filtro para transformar a cor do SVG para tom verde azulado #46B89E */
+  filter: hue-rotate(160deg) saturate(0.8) brightness(1.1);
+}
+
+.pedidos-box:hover {
+  transform: scale(1.02);
+}
+
+.pedidos-scroll-container {
+  height: 80%; /* Aumentado para aproveitar mais espaço */
+  overflow-y: auto;
+  padding: 15px 25px 40px 25px; /* Reduzido padding para elementos mais próximos */
+  margin: 5% auto 0 auto; /* Margem superior reduzida */
+  max-width: 90%; /* Aumentado para aproveitar mais largura */
+  /* CRÍTICO: Garante que o scroll não vaze da caixa */
+  box-sizing: border-box;
+  
+  /* Estilização da scrollbar */
+  scrollbar-width: auto; /* Mudado de thin para auto - mais visível */
+  scrollbar-color: rgba(100, 100, 100, 0.8) rgba(200, 200, 200, 0.4);
+}
+
+.pedidos-scroll-container::-webkit-scrollbar {
+  width: 12px; /* Aumentado de 6px para 12px - mais visível */
+}
+
+.pedidos-scroll-container::-webkit-scrollbar-track {
+  background: rgba(200, 200, 200, 0.4); /* Mais visível */
+  border-radius: 0; /* Removido para ficar retangular */
+}
+
+.pedidos-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.8); /* Muito mais visível */
+  border-radius: 0; /* Removido para ficar retangular */
+  transition: background 0.3s ease;
+}
+
+.pedidos-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(70, 70, 70, 0.9); /* Ainda mais escuro no hover */
+}
+
+.pedido-item-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0; /* Reduzido de 15px para 8px - elementos mais próximos */
+  transition: all 0.3s ease;
+}
+
+.pedido-item-box:hover {
+  transform: translateX(5px);
+}
+
+.pedido-info {
+  flex: 1;
+  margin-right: 10px; /* Reduzido de 15px para 10px */
+}
+
+.pedido-header-box {
+  display: flex;
+  justify-content: flex-start; /* Alinhado à esquerda sem o tempo */
+  align-items: center;
+  margin-bottom: 4px; /* Reduzido de 8px para 4px - mais próximo */
+}
+
+.pedido-mesa-box {
+  font-weight: bold;
+  font-size: 20px; /* Aumentado de 17px para 20px */
+  color: #8B4B6B; /* Tom rosa mais escuro - APENAS A MESA COLORIDA */
+  text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
+}
+
+.pedido-tempo-box {
+  display: none; /* Removido completamente */
+}
+
+.pedido-descricao-box {
+  margin: 0;
+  color: #333333; /* Texto próximo do preto */
+  text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
+  line-height: 1.4; /* Voltou ao valor original para melhor legibilidade */
+  font-size: 16px; /* Aumentado de 14px para 16px */
+}
+
+.check-button {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  width: 36px; /* Aumentado para melhor usabilidade */
+  height: 36px; /* Aumentado para melhor usabilidade */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 7px; /* Aumentado */
+}
+
+.check-button:hover {
+  background: rgba(220, 220, 220, 0.3); /* Hover neutro */
+  border-radius: 8px;
+  transform: scale(1.1);
+}
+
+.check-button:active {
+  transform: scale(0.95);
+}
+
+.check-icon {
+  width: 26px; /* Aumentado para melhor visibilidade */
+  height: 26px; /* Aumentado para melhor visibilidade */
+  /* Removido o filtro para manter a cor original do check.svg */
+  transition: all 0.3s ease;
+}
+
+.check-button:hover .check-icon {
+  /* Removido o filtro de cor para manter a cor original no hover */
+  transform: scale(1.1);
+}
+
+.pedido-divider {
+  height: 3px; /* Aumentado de 2px para 3px - mais grossa */
+  background: rgba(150, 150, 150, 0.6); /* Cor sólida ao invés de gradiente */
+  margin: 0 10px;
+  border-radius: 1px;
+}
+
+.empty-box-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #555555; /* Texto neutro escuro */
+  font-style: italic;
+  text-align: center;
+}
+
+.empty-box-state p {
+  margin: 0;
+  padding: 20px;
+  border: 2px dashed rgba(150, 150, 150, 0.4);
+  border-radius: 8px;
+  background: rgba(240, 240, 240, 0.1);
+}
+
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .pedidos-box {
+    height: 500px;
+    max-width: 100%;
+  }
+  
+  .pedidos-scroll-container {
+    height: 75%; /* Aumentado para aproveitar mais espaço */
+    padding: 12px 20px 30px 20px; /* Padding reduzido */
+    margin: 6% auto 0 auto; /* Margem superior reduzida */
+    max-width: 92%; /* Aumentado para tablets */
+  }
+  
+  .pedido-item-box {
+    padding: 6px 0; /* Reduzido para elementos mais próximos */
+  }
+  
+  .pedido-mesa-box {
+    font-size: 18px;
+  }
+  
+  .pedido-descricao-box {
+    font-size: 14px;
+  }
+  
+  .check-button {
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+  }
+  
+  .check-icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pedidos-box {
+    height: 250px;
+  }
+  
+  .pedidos-scroll-container {
+    height: 80%; /* Aumentado para aproveitar mais espaço */
+    padding: 10px 18px 25px 18px; /* Padding bem reduzido */
+    margin: 7% auto 0 auto; /* Margem superior reduzida */
+    max-width: 85%; /* Aumentado para mobile */
+  }
+  
+  .pedido-mesa-box {
+    font-size: 16px;
+  }
+  
+  .pedido-descricao-box {
+    font-size: 13px;
+  }
+}

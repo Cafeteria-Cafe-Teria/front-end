@@ -2,6 +2,7 @@ import React from 'react';
 import botao1 from '../assets/botao1.svg';
 import botao2 from '../assets/botao2.svg';
 import botao3 from '../assets/botao3.svg';
+import botao4  from '../assets/caixa3.svg';
 import Cafe from '../assets/cafe1.svg';
 import Cha from '../assets/chá1.svg';
 import './WelcomeButton.css';
@@ -42,6 +43,8 @@ const WelcomeButton = ({
         return botao2;
       case 'botao3':
         return botao3;
+      case 'botao4':
+        return botao4;
       default:
         return botao1;
     }

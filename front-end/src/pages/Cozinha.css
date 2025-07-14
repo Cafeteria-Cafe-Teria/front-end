@@ -1,117 +1,188 @@
 .cozinha-container {
-  padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
+  padding: 20px; /* Reduzido de 40px para 20px */
+  background-color: #46B89E;
+  min-height: 100vh;
+  font-family: 'Pixelify Sans', 'PixelSans', monospace;
+  color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.cozinha-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../assets/fundo.svg');
+  background-size: 100px 100px;
+  mix-blend-mode: multiply;
+  animation: patternMove 25s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cozinha-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes patternMove {
+  0% {
+    background-position: 0 0;
+  }
+  25% {
+    background-position: 50px -50px;
+  }
+  50% {
+    background-position: 100px 0;
+  }
+  75% {
+    background-position: 50px 50px;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
 
 .cozinha-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px; /* Reduzido de 40px para 20px */
+  width: 100%;
+  position: relative;
+}
+
+.cozinha-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .cozinha-title {
-  margin: 0;
-  color: #333;
+  font-size: 2.5rem;
+  margin: 0 0 10px 0; /* Reduzido de 20px para 10px */
+  color: #EDE3E3;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  font-family: 'Pixelify Sans', 'PixelSans', monospace;
+}
+
+.cozinha-logo {
+  max-width: 120px; /* Reduzido de 200px para 120px - semelhante ao cliente */
+  max-height: 120px; /* Reduzido de 200px para 120px - semelhante ao cliente */
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.3));
+  animation: logoFloat 6s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
 }
 
 .cozinha-back-link {
   text-decoration: none;
-  color: #007bff;
+  color: #FFFFFF; /* Texto branco */
   font-size: 16px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+  font-weight: 500;
+  padding: 8px 12px; /* Padding reduzido para ficar mais compacto */
+  border-radius: 8px; /* Border-radius menor para menos destaque */
+  transition: all 0.3s ease;
+  background: transparent; /* Sem fundo */
+  border: 2px solid transparent; /* Borda transparente */
+  backdrop-filter: none; /* Removido blur */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra para legibilidade */
+  position: absolute;
+  top: 10px; /* Mais próximo do topo */
+  left: 10px; /* Mais próximo da esquerda */
+  font-family: 'Pixelify Sans', 'PixelSans', monospace;
 }
 
 .cozinha-back-link:hover {
-  background-color: #f8f9fa;
-  text-decoration: underline;
+  background: rgba(255,255,255,0.1); /* Fundo sutil no hover */
+  transform: translateY(-2px) scale(1.02); /* Efeito mais sutil */
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7); /* Sombra mais intensa no hover */
+  border-color: rgba(255,255,255,0.2); /* Borda sutil no hover */
+  text-decoration: underline; /* Sublinhado no hover */
 }
 
-.cozinha-main-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
+/* Navegação de Status */
+.status-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 8px; /* Gap reduzido para telas maiores */
+  margin-top: 20px;
+  flex-wrap: nowrap; /* Em linha para telas maiores */
+  align-items: center;
 }
 
-.cozinha-secondary-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+/* Estilo para WelcomeButtons na navegação de status */
+.status-navigation .welcome-button {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  color: #780A01 !important; /* Garante cor consistente */
+  font-size: 15px !important; /* Ajusta tamanho da fonte para melhor legibilidade */
+  font-weight: 600 !important; /* Deixa o texto mais destacado */
+  text-shadow: none !important; /* Remove sombra de texto para clareza */
+  flex-shrink: 0; /* Evita que os botões encolham */
+  white-space: nowrap; /* Impede quebra de linha no texto */
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-.cozinha-card {
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #dee2e6;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.status-navigation .welcome-button:hover {
+  transform: scale(1.08) !important;
+  filter: brightness(1.2) drop-shadow(0 6px 12px rgba(0,0,0,0.3)) !important;
 }
 
-.cozinha-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+/* Estilo para botões ativos */
+.status-navigation .welcome-button.active-status {
+  filter: brightness(1.1) drop-shadow(0 4px 8px rgba(0,0,0,0.4)) !important;
+  transform: scale(1.05) !important;
 }
 
-.cozinha-card h3 {
-  margin-top: 0;
-  color: #495057;
+/* Container de Pedidos */
+.pedidos-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px; /* Reduzido de 40px para 20px */
+  max-width: 600px;
+  width: 100%;
 }
 
-.cozinha-card p {
-  color: #6c757d;
-  margin-bottom: 0;
+.pedidos-title {
+  text-align: center;
+  margin-bottom: 15px; /* Reduzido de 30px para 15px */
+  font-size: 1.8rem;
+  color: #EDE3E3;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-.pedido-item {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  background-color: white;
-}
-
-.pedido-item:last-child {
-  margin-bottom: 0;
-}
-
-.pedido-mesa {
-  font-weight: bold;
-  color: #333;
-}
-
-.pedido-descricao {
-  margin: 5px 0;
-  font-size: 14px;
-  color: #666;
-}
-
-.status-badge {
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 12px;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-.status-pendente {
-  background-color: #fff3cd;
-  color: #856404;
-}
-
-.status-preparando {
-  background-color: #d1ecf1;
-  color: #0c5460;
-}
-
-.estatisticas p {
-  margin: 8px 0;
-  color: #495057;
-}
-
-.estatisticas strong {
-  color: #333;
+@keyframes floatGlow {
+  0%, 100% {
+    transform: translateY(0px);
+    box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+  }
+  50% {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(255,255,255,0.2);
+  }
 }
