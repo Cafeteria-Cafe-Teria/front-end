@@ -3,11 +3,12 @@ import './ClienteWelcome.css';
 import logo from '../assets/LOGO.svg';
 import WelcomeButton from '../components/WelcomeButton';
 import CheckboxButton from '../components/CheckboxButton';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import ApiService from '../service/ApiService';
 
 const ClienteAdicionais = () => {
-  const [pedidoUuid, setPedidoUuid] = useState(null);
+  const { uuid } = useParams();
+  const [pedidoUuid, setPedidoUuid] = useState(uuid || null);
   const [loading, setLoading] = useState(false);
   const [tipoBebida, setTipoBebida] = useState('Café');
   const [adicionaisSelecionados, setAdicionaisSelecionados] = useState([]);
@@ -19,22 +20,21 @@ const ClienteAdicionais = () => {
   const adicionaisDisponiveis = [
     { 
       nome: 'Leite de Aveia', 
-      preco: 'R$ 1,50',
-      valor: 'Leite de Aveia'  // Valor exato para o backend
+      preco: 'R$ 2,00',
+      valor: 'Leite de Aveia'
     },
     { 
       nome: 'Canela', 
-      preco: 'R$ 0,50',
-      valor: 'Canela'  // Valor exato para o backend
+      preco: 'R$ 2,00',
+      valor: 'Canela'
     },
     { 
       nome: 'Sem Açúcar', 
-      preco: 'Grátis',
-      valor: 'Sem Açucar'  // Valor exato para o backend (sem acento)
+      preco: 'R$ 0,00',
+      valor: 'Sem Açucar'
     }
   ];
 
-  // Recuperar dados do pedido existente
   useEffect(() => {
     const recuperarPedidoExistente = () => {
       try {
@@ -44,21 +44,17 @@ const ClienteAdicionais = () => {
         if (pedidoExistente) {
           setPedidoUuid(pedidoExistente);
           setTipoBebida(bebidaSelecionada);
-          console.log('Pedido recuperado para adicionais:', pedidoExistente);
-          console.log('Tipo de bebida:', bebidaSelecionada);
         } else {
-          console.error('Nenhum pedido encontrado!');
-          navigate('/cliente/bebida');
+        navigate(`/cliente/${uuid}/bebida`);
         }
       } catch (error) {
-        console.error('Erro ao recuperar pedido:', error);
+        // erro ao recuperar pedido
       }
     };
 
     recuperarPedidoExistente();
   }, [navigate]);
 
-  // Função para alternar adicional (usando o valor do backend)
   const toggleAdicional = (adicional) => {
     setAdicionaisSelecionados(prev => {
       if (prev.includes(adicional.valor)) {
@@ -69,12 +65,10 @@ const ClienteAdicionais = () => {
     });
   };
 
-  // Função para verificar se adicional está selecionado (usando o valor do backend)
   const isAdicionalSelecionado = (adicional) => {
     return adicionaisSelecionados.includes(adicional.valor);
   };
 
-  // Função para obter nomes dos adicionais selecionados para exibir
   const getNomesAdicionaisSelecionados = () => {
     return adicionaisDisponiveis
       .filter(adicional => adicionaisSelecionados.includes(adicional.valor))
@@ -82,68 +76,30 @@ const ClienteAdicionais = () => {
   };
 
   const handleAdicionarBebida = async () => {
-    if (!pedidoUuid) {
-      console.error('Pedido não foi criado ainda');
-      return;
-    }
+    if (!pedidoUuid) return;
 
     try {
       setLoading(true);
-      
-      // Adicionar bebida completa (com ou sem adicionais)
       const bebidaCompleta = {
         tipo: tipoBebida,
-        adicionais: adicionaisSelecionados  // Usando os valores exatos do backend
+        adicionais: adicionaisSelecionados
       };
-
-      console.log('Adicionando bebida completa:', bebidaCompleta);
-      
       const resultado = await ApiService.adicionarBebida(pedidoUuid, bebidaCompleta);
-      console.log('Bebida adicionada:', resultado);
-      
-      // Salvar ID da bebida no localStorage
       localStorage.setItem('bebidaId', resultado.id || '0');
-      
       setBebidaAdicionada(true);
-      alert('Bebida adicionada ao pedido com sucesso!');
-      
     } catch (error) {
-      console.error('Erro ao adicionar bebida:', error);
       alert('Erro ao adicionar bebida!');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleEnviarPedido = async () => {
-    if (!pedidoUuid) {
-      console.error('Pedido não foi criado ainda');
-      return;
-    }
-
-    // Se a bebida ainda não foi adicionada, adicionar primeiro
+  // Agora só adiciona a bebida, não finaliza o pedido
+  const handleAvancar = async () => {
     if (!bebidaAdicionada) {
       await handleAdicionarBebida();
     }
-
-    try {
-      setLoading(true);
-      await ApiService.enviarPedido(pedidoUuid);
-      console.log('Pedido enviado com sucesso!');
-      
-      // Limpar localStorage após enviar (finalizar o pedido)
-      localStorage.removeItem('pedidoUuid');
-      localStorage.removeItem('tipoBebida');
-      localStorage.removeItem('bebidaId');
-      
-      alert('Pedido enviado com sucesso!');
-      navigate('/cliente');
-    } catch (error) {
-      console.error('Erro ao enviar pedido:', error);
-      alert('Erro ao enviar pedido!');
-    } finally {
-      setLoading(false);
-    }
+    navigate(`/cliente/${uuid}/nova-bebida`);
   };
 
   if (!pedidoUuid) {
@@ -165,51 +121,31 @@ const ClienteAdicionais = () => {
         alignItems: 'center',
         marginTop: '-20px'
       }}>
-        <text className="cliente-welcome-title">
-          Personalize seu {tipoBebida}:
-        </text>
+        <span className="cliente-adicionais-title">
+          Deseja acrescentar algum adicional ao seu {tipoBebida}?:
+        </span>
         
         {/* Seção de Adicionais com CheckboxButton */}
         <div style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '10px',
+          gap: '2px',
           alignItems: 'center',
           width: '100%'
         }}>
-          <text style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>
-            Adicionais:
-          </text>
-          
           {adicionaisDisponiveis.map((adicional, index) => (
             <CheckboxButton
               key={index}
               text={adicional.nome}
               textPrice={adicional.preco}
               checked={isAdicionalSelecionado(adicional)}
-              width={280}
-              height={80}
+              width={250}
+              height={100}
               onClick={() => toggleAdicional(adicional)}
               disabled={loading || bebidaAdicionada}
             />
           ))}
         </div>
-
-        {/* Mostrar adicionais selecionados */}
-        {adicionaisSelecionados.length > 0 && (
-          <div style={{
-            textAlign: 'center',
-            marginTop: '10px',
-            padding: '10px',
-            backgroundColor: 'rgba(76, 175, 80, 0.1)',
-            borderRadius: '8px',
-            margin: '10px 20px'
-          }}>
-            <text style={{ fontSize: '16px', fontWeight: 'bold', color: '#4CAF50' }}>
-              Adicionais selecionados: {getNomesAdicionaisSelecionados().join(', ')}
-            </text>
-          </div>
-        )}
 
         {/* Mostrar se bebida foi adicionada */}
         {bebidaAdicionada && (
@@ -219,24 +155,13 @@ const ClienteAdicionais = () => {
             padding: '10px',
             backgroundColor: 'rgba(76, 175, 80, 0.2)',
             borderRadius: '8px',
-            margin: '10px 20px'
+            margin: '10px 20px',
+            marginBottom: '40px'
           }}>
-            <text style={{ fontSize: '16px', fontWeight: 'bold', color: '#2E7D32' }}>
-              ✅ {tipoBebida} adicionado ao pedido!
-            </text>
+            <span style={{ fontSize: '16px', fontWeight: 'bold', color: '#2E7D32' }}>
+              {tipoBebida} adicionado ao pedido!
+            </span>
           </div>
-        )}
-
-        {/* Botão para adicionar bebida */}
-        {!bebidaAdicionada && (
-          <WelcomeButton
-            type="botao3"
-            text="Adicionar ao Pedido"
-            width={280}
-            height={70}
-            onClick={handleAdicionarBebida}
-            disabled={loading}
-          />
         )}
       </div>
       
@@ -250,7 +175,7 @@ const ClienteAdicionais = () => {
         gap: '20px',
         alignItems: 'center'
       }}>
-        <Link to="/cliente/bebida">  
+        <Link to={`/cliente/${uuid}/bebida`}>  
           <WelcomeButton
             type="botao3"
             text="Voltar"
@@ -261,10 +186,10 @@ const ClienteAdicionais = () => {
         </Link>
         <WelcomeButton
           type="botao2"
-          text="Finalizar Pedido"
+          text="Avançar"
           width={200}
           height={60}
-          onClick={handleEnviarPedido}
+          onClick={handleAvancar}
           disabled={loading}
         />
       </div>

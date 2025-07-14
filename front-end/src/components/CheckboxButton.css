@@ -6,9 +6,8 @@
   background-color: transparent;
   position: relative;
   user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  background: url('../assets/caixa.svg') center center no-repeat; /* <-- movido para cá */
+  background-size: contain; /* <-- movido para cá */
 }
 
 .checkbox-button:hover:not(:disabled) {
@@ -30,21 +29,55 @@
   transform: none !important;
 }
 
-/* Animações adicionais para o checkbox */
-.checkbox-button .checkbox-mark {
-  animation: checkboxPop 0.2s ease;
+.checkbox-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+  margin-right: 4px;
+  transition: box-shadow 0.2s;
+  /* Remova as duas linhas abaixo */
+  /* background: url('../assets/check/caixa.svg') center center no-repeat; */
+  /* background-size: contain; */
+  position: relative;
 }
 
-@keyframes checkboxPop {
-  0% {
-    transform: scale(0) rotate(45deg);
-  }
-  50% {
-    transform: scale(1.2) rotate(45deg);
-  }
-  100% {
-    transform: scale(1) rotate(45deg);
-  }
+.checkbox-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Texto do checkbox */
+.checkbox-text {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.checkbox-button.checked .checkbox-text {
+  font-weight: bold;
+  color: #2E7D32;
+}
+
+/* Preço */
+.checkbox-price {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: #5F2D29;
+  transition: color 0.2s;
+}
+
+.checkbox-button.checked .checkbox-price {
+  color: #2E7D32;
 }
 
 /* Responsividade */
@@ -53,9 +86,10 @@
     font-size: 14px;
     padding: 0 15px;
   }
-  
-  .checkbox-button .checkbox-visual {
+  .checkbox-visual {
     width: 18px;
     height: 18px;
+    min-width: 18px;
+    min-height: 18px;
   }
 }

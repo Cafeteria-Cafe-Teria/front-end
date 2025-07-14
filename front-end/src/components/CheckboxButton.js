@@ -1,43 +1,26 @@
 import React from 'react';
-import caixa from '../assets/caixa.svg';
+import svgUnchecked from '../assets/check/1ponto.svg';
+import svgChecked from '../assets/check/2ponto.svg';
 import './CheckboxButton.css';
 
-/**
- * Componente de checkbox personalizado inspirado no WelcomeButton
- * @param {Object} props
- * @param {string} props.text - Texto a ser exibido no checkbox
- * @param {string} props.textPrice - Preço a ser exibido ao lado do texto
- * @param {function} props.onClick - Função a ser executada no clique
- * @param {boolean} props.checked - Se o checkbox está marcado
- * @param {string} props.className - Classes CSS adicionais
- * @param {Object} props.style - Estilos inline adicionais
- * @param {string|number} props.width - Largura do componente
- * @param {string|number} props.height - Altura do componente
- * @param {boolean} props.disabled - Se o checkbox está desabilitado
- */
-const CheckboxButton = ({ 
-  text = '', 
+const CheckboxButton = ({
+  text = '',
   textPrice = '',
   onClick,
   checked = false,
-  className = '', 
+  className = '',
   style = {},
   width = 280,
   height = 80,
   disabled = false,
-  ...props 
+  ...props
 }) => {
-  
   return (
     <button
       onClick={onClick}
       className={`checkbox-button ${className} ${checked ? 'checked' : ''}`}
       disabled={disabled}
       style={{
-        backgroundImage: `url(${caixa})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center center',
-        backgroundSize: 'contain',
         border: 'none',
         cursor: disabled ? 'not-allowed' : 'pointer',
         outline: 'none',
@@ -56,59 +39,33 @@ const CheckboxButton = ({
       }}
       {...props}
     >
-      {/* Lado esquerdo - Checkbox personalizado */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
         gap: '12px'
       }}>
-        {/* Checkbox visual */}
-        <div style={{
-          width: '20px',
-          height: '20px',
-          border: '2px solid #333',
-          borderRadius: '4px',
-          backgroundColor: checked ? '#4CAF50' : 'transparent',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          transition: 'all 0.2s ease',
-          position: 'relative'
-        }}>
-          {/* Checkmark */}
-          {checked && (
-            <div style={{
-              width: '6px',
-              height: '12px',
-              border: 'solid white',
-              borderWidth: '0 2px 2px 0',
-              transform: 'rotate(45deg)',
-              marginTop: '-2px'
-            }} />
-          )}
-        </div>
-        
-        {/* Texto do adicional */}
-        <span style={{ 
-          textDecoration: 'none',
-          fontSize: '16px',
-          fontWeight: checked ? 'bold' : 'normal',
-          color: checked ? '#2E7D32' : '#333',
-          transition: 'all 0.2s ease'
-        }}>
+        <span className="checkbox-visual">
+          <img
+            src={checked ? svgChecked : svgUnchecked}
+            alt={checked ? 'Marcado' : 'Desmarcado'}
+            className="checkbox-svg"
+            draggable={false}
+            style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: 1
+            }}
+          />
+        </span>
+        <span className="checkbox-text">
           {text}
         </span>
       </div>
-      
-      {/* Lado direito - Preço */}
       {textPrice && (
-        <span style={{ 
-          textDecoration: 'none',
-          fontSize: '14px',
-          fontWeight: 'bold',
-          color: checked ? '#2E7D32' : '#666',
-          transition: 'color 0.2s ease'
-        }}>
+        <span className="checkbox-price">
           {textPrice}
         </span>
       )}

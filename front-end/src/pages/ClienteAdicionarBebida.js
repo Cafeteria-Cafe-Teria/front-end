@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import './ClienteWelcome.css';
 import logo from '../assets/LOGO.svg';
 import WelcomeButton from '../components/WelcomeButton';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import ApiService from '../service/ApiService';
 
 const ClienteAdicionarBebida = () => {
-  const [pedidoUuid, setPedidoUuid] = useState(null);
+  const { uuid } = useParams();
+  const [pedidoUuid, setPedidoUuid] = useState(uuid || null);
   const [loading, setLoading] = useState(false);
   const [tipoBebidaSelecionada, setTipoBebidaSelecionada] = useState(null);
   const pedidoCriadoRef = useRef(false);
@@ -22,23 +23,34 @@ const ClienteAdicionarBebida = () => {
       try {
         setLoading(true);
         pedidoCriadoRef.current = true;
-        
-        // Verificar se já existe um pedido no localStorage
+
         const pedidoExistente = localStorage.getItem('pedidoUuid');
-        const bebidaSelecionada = localStorage.getItem('tipoBebida');
-        
+        let pedidoValido = false;
+
         if (pedidoExistente) {
-          // Usar pedido existente
-          setPedidoUuid(pedidoExistente);
-          setTipoBebidaSelecionada(bebidaSelecionada);
-          console.log('Pedido existente recuperado:', pedidoExistente);
-          console.log('Bebida selecionada:', bebidaSelecionada);
-        } else {
-          // Criar novo pedido apenas se não existir
+          // Consulta o status do pedido na API
+          try {
+            const detalhes = await ApiService.gerarNotaDePedido(pedidoExistente);
+            if (detalhes.status !== 'Recebido') {
+              setPedidoUuid(pedidoExistente);
+              setTipoBebidaSelecionada(localStorage.getItem('tipoBebida'));
+              pedidoValido = true;
+            }
+          } catch (e) {
+            // Se não conseguir buscar, trata como inválido
+          }
+        }
+
+        if (!pedidoValido) {
+          // Limpa localStorage se pedido não é válido
+          localStorage.removeItem('pedidoUuid');
+          localStorage.removeItem('tipoBebida');
+          localStorage.removeItem('bebidaId');
+          // Cria novo pedido
           const novoPedido = await ApiService.criarPedido();
           setPedidoUuid(novoPedido.uuid);
           localStorage.setItem('pedidoUuid', novoPedido.uuid);
-          console.log('Novo pedido criado:', novoPedido);
+          setTipoBebidaSelecionada(null);
         }
       } catch (error) {
         console.error('Erro ao gerenciar pedido:', error);
@@ -87,7 +99,7 @@ const ClienteAdicionarBebida = () => {
     }
 
     console.log('Avançando para adicionais - bebida será adicionada lá');
-    navigate('/cliente/bebida/adicionais');
+    navigate(`/cliente/${pedidoUuid}/bebida/adicionais`);
   };
 
   const handleCancelarPedido = async () => {
@@ -133,7 +145,7 @@ const ClienteAdicionarBebida = () => {
         alignItems: 'center',
         marginTop: '-20px'
       }}>
-        <text className="cliente-welcome-title">Deseja adicionar:</text>
+        <span className="cliente-welcome-title">Deseja adicionar:</span>
         <WelcomeButton
           type="botao1"
           text="Chá"
@@ -162,15 +174,12 @@ const ClienteAdicionarBebida = () => {
       {tipoBebidaSelecionada && (
         <div style={{
           textAlign: 'center',
-          marginTop: '20px',
-          padding: '10px',
-          backgroundColor: 'rgba(76, 175, 80, 0.1)',
-          borderRadius: '8px',
-          margin: '20px'
+          marginTop: '10px',
+          padding: '15px',
         }}>
-          <text style={{ fontSize: '16px', fontWeight: 'bold', color: '#4CAF50' }}>
+          <span style={{ fontSize: '18px', color: '#ffe3e1ff',  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
             {tipoBebidaSelecionada} selecionado!
-          </text>
+          </span>
         </div>
       )}
       

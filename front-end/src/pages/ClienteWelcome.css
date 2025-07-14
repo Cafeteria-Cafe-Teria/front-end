@@ -16,6 +16,36 @@
   position: relative;
 }
 
+.cliente-pagamento-container {
+  text-align: center;
+  background-color: #B84665;
+  background-size: 400% 400%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Pixelify Sans', 'PixelSans', monospace;
+  color: white;
+  position: relative;
+}
+
+.cliente-pagamento-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../assets/fundo.svg');
+  background-size: 100px 100px;
+  opacity: 0.25;
+  animation: patternMove 25s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+
 .cliente-welcome-container::before {
   content: '';
   position: absolute;
@@ -92,6 +122,10 @@
   color: #EDE3E3;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   font-family: 'Pixelify Sans', 'PixelSans', monospace;
+}
+
+.cliente-adicionais-title {
+  font-size: 1.1rem;
 }
 
 .cliente-welcome-subtitle {

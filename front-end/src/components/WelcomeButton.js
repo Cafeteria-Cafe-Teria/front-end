@@ -2,6 +2,7 @@ import React from 'react';
 import botao1 from '../assets/botao1.svg';
 import botao2 from '../assets/botao2.svg';
 import botao3 from '../assets/botao3.svg';
+import caixa from '../assets/caixa.svg';
 import Cafe from '../assets/cafe1.svg';
 import Cha from '../assets/chá1.svg';
 import './WelcomeButton.css';
@@ -42,6 +43,8 @@ const WelcomeButton = ({
         return botao2;
       case 'botao3':
         return botao3;
+      case 'caixa': // Adicione esta variação
+        return caixa;
       default:
         return botao1;
     }
@@ -85,7 +88,7 @@ const WelcomeButton = ({
     }
   };
   
-  return (
+   return (
     <button
       onClick={onClick}
       className={`welcome-button ${className}`}
