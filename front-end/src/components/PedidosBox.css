@@ -2,13 +2,12 @@
   background: url('../assets/caixa3.svg') no-repeat center center;
   background-size: contain;
   width: 100%;
-  max-width: 480px;
-  height: 400px;
+  max-width: 350px;
+  height: 300px;
   overflow: hidden; /* CRÍTICO: garante que nada vaze */
   transition: all 0.3s ease;
   position: relative;
   /* Filtro para transformar a cor do SVG para tom verde azulado #46B89E */
-  filter: hue-rotate(160deg) saturate(0.8) brightness(1.1);
 }
 
 .pedidos-box:hover {
@@ -16,11 +15,11 @@
 }
 
 .pedidos-scroll-container {
-  height: 80%; /* Aumentado para aproveitar mais espaço */
+  height: 83%; /* Reduzido de 80% para 78% */
   overflow-y: auto;
-  padding: 15px 25px 40px 25px; /* Reduzido padding para elementos mais próximos */
-  margin: 5% auto 0 auto; /* Margem superior reduzida */
-  max-width: 90%; /* Aumentado para aproveitar mais largura */
+  padding: 10px; /* Padding ajustado */
+  margin: 4% auto 0 auto; /* Margem superior reduzida */
+  max-width: 88%; /* Reduzido de 90% para 88% */
   /* CRÍTICO: Garante que o scroll não vaze da caixa */
   box-sizing: border-box;
   
@@ -75,7 +74,7 @@
 .pedido-mesa-box {
   font-weight: bold;
   font-size: 20px; /* Aumentado de 17px para 20px */
-  color: #8B4B6B; /* Tom rosa mais escuro - APENAS A MESA COLORIDA */
+  color: #780A01; /* Mesma cor dos botões - marrom escuro */
   text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
 }
 
@@ -85,7 +84,7 @@
 
 .pedido-descricao-box {
   margin: 0;
-  color: #333333; /* Texto próximo do preto */
+  color: #5A0701; /* Tom mais claro da mesma cor dos botões para melhor legibilidade */
   text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
   line-height: 1.4; /* Voltou ao valor original para melhor legibilidade */
   font-size: 16px; /* Aumentado de 14px para 16px */
@@ -140,7 +139,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: #555555; /* Texto neutro escuro */
+  color: #780A01; /* Mesma cor dos botões para consistência */
   font-style: italic;
   text-align: center;
 }
@@ -158,58 +157,80 @@
 /* Responsividade */
 @media (max-width: 768px) {
   .pedidos-box {
-    height: 500px;
+    height: 400px; /* Reduzido de 500px para 400px */
     max-width: 100%;
   }
   
   .pedidos-scroll-container {
-    height: 75%; /* Aumentado para aproveitar mais espaço */
-    padding: 12px 20px 30px 20px; /* Padding reduzido */
-    margin: 6% auto 0 auto; /* Margem superior reduzida */
-    max-width: 92%; /* Aumentado para tablets */
+    height: 75%; /* Mantido para aproveitar espaço */
+    padding: 10px 18px 25px 18px; /* Padding ajustado */
+    margin: 4% auto 0 auto; /* Margem superior reduzida */
+    max-width: 88%; /* Reduzido para não vazar */
   }
   
   .pedido-item-box {
-    padding: 6px 0; /* Reduzido para elementos mais próximos */
+    padding: 5px 0; /* Reduzido para elementos mais próximos */
   }
   
   .pedido-mesa-box {
-    font-size: 18px;
+    font-size: 17px; /* Reduzido de 18px para 17px */
   }
   
   .pedido-descricao-box {
-    font-size: 14px;
+    font-size: 13px; /* Reduzido de 14px para 13px */
+    line-height: 1.3; /* Ajustado para economizar espaço */
   }
   
   .check-button {
-    width: 32px;
-    height: 32px;
-    padding: 5px;
+    width: 30px; /* Reduzido */
+    height: 30px; /* Reduzido */
+    padding: 4px; /* Reduzido */
   }
   
   .check-icon {
-    width: 22px;
-    height: 22px;
+    width: 20px; /* Reduzido */
+    height: 20px; /* Reduzido */
   }
 }
 
 @media (max-width: 480px) {
   .pedidos-box {
-    height: 250px;
+    height: 220px; /* Reduzido para dar mais espaço aos botões */
   }
   
   .pedidos-scroll-container {
-    height: 80%; /* Aumentado para aproveitar mais espaço */
-    padding: 10px 18px 25px 18px; /* Padding bem reduzido */
-    margin: 7% auto 0 auto; /* Margem superior reduzida */
-    max-width: 85%; /* Aumentado para mobile */
+    height: 75%; /* Reduzido para não vazar */
+    padding: 5px 12px 15px 12px; /* Padding ainda mais reduzido */
+    margin: 3% auto 0 auto; /* Margem superior bem reduzida */
+    max-width: 80%; /* Reduzido para não vazar lateralmente */
+  }
+  
+  .pedido-item-box {
+    padding: 3px 0; /* Bem reduzido para elementos mais próximos */
   }
   
   .pedido-mesa-box {
-    font-size: 16px;
+    font-size: 14px; /* Reduzido de 16px para 14px */
   }
   
   .pedido-descricao-box {
-    font-size: 13px;
+    font-size: 11px; /* Reduzido de 13px para 11px */
+    line-height: 1.2; /* Reduzido para economizar espaço */
+  }
+  
+  .check-button {
+    width: 28px; /* Reduzido */
+    height: 28px; /* Reduzido */
+    padding: 3px; /* Reduzido */
+  }
+  
+  .check-icon {
+    width: 18px; /* Reduzido */
+    height: 18px; /* Reduzido */
+  }
+  
+  .pedido-divider {
+    height: 2px; /* Reduzido */
+    margin: 0 8px; /* Margens laterais reduzidas */
   }
 }

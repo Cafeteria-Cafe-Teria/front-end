@@ -1,15 +1,16 @@
 .cozinha-container {
-  padding: 20px; /* Reduzido de 40px para 20px */
-  background-color: #46B89E;
+  padding: 25px; /* Reduzido de 40px para 20px */
+  text-align: center;
+  background-color: #46b89e;
+  background-size: 400% 400%;
   min-height: 100vh;
-  font-family: 'Pixelify Sans', 'PixelSans', monospace;
-  color: white;
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  font-family: 'Pixelify Sans', 'PixelSans', monospace;
+  color: white;
+  position: relative;
 }
 
 .cozinha-container::before {
@@ -99,7 +100,6 @@
   color: #FFFFFF; /* Texto branco */
   font-size: 16px;
   font-weight: 500;
-  padding: 8px 12px; /* Padding reduzido para ficar mais compacto */
   border-radius: 8px; /* Border-radius menor para menos destaque */
   transition: all 0.3s ease;
   background: transparent; /* Sem fundo */
@@ -124,42 +124,51 @@
 .status-navigation {
   display: flex;
   justify-content: center;
-  gap: 8px; /* Gap reduzido para telas maiores */
-  margin-top: 20px;
-  flex-wrap: nowrap; /* Em linha para telas maiores */
+  margin-top: 5px; /* Reduzido de 20px para 10px */
   align-items: center;
 }
 
-/* Estilo para WelcomeButtons na navegação de status */
-.status-navigation .welcome-button {
-  transition: all 0.3s ease;
+.status-button {
+  background: url('../assets/caixa3.svg') no-repeat center;
+  background-size:contain;
+  border: none;
+  color: #780A01; /* Cor marrom escura para contraste com o caixa3.svg */
+  padding: 15px 20px;
+  font-family: 'Pixelify Sans', 'PixelSans', monospace;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  color: #780A01 !important; /* Garante cor consistente */
-  font-size: 15px !important; /* Ajusta tamanho da fonte para melhor legibilidade */
-  font-weight: 600 !important; /* Deixa o texto mais destacado */
-  text-shadow: none !important; /* Remove sombra de texto para clareza */
-  flex-shrink: 0; /* Evita que os botões encolham */
-  white-space: nowrap; /* Impede quebra de linha no texto */
-  text-align: center !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 6px;
+  width: 90px;
+  text-align: center;
 }
 
-.status-navigation .welcome-button:hover {
-  transform: scale(1.08) !important;
-  filter: brightness(1.2) drop-shadow(0 6px 12px rgba(0,0,0,0.3)) !important;
+.status-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  filter: brightness(1.1) drop-shadow(0 6px 12px rgba(0,0,0,0.3));
 }
 
-/* Estilo para botões ativos */
-.status-navigation .welcome-button.active-status {
-  filter: brightness(1.1) drop-shadow(0 4px 8px rgba(0,0,0,0.4)) !important;
-  transform: scale(1.05) !important;
+.status-button.active {
+  transform: translateY(-2px);
+  filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+}
+
+.pedido-count {
+  font-size: 12px;
+  background: rgba(255,255,255,0.8); /* Fundo mais opaco para contraste */
+  color: #780A01; /* Mesma cor do texto principal */
+  padding: 4px 10px;
+  border-radius: 12px;
+  margin-top: 4px;
+  font-weight: bold;
 }
 
 /* Container de Pedidos */
 .pedidos-container {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;

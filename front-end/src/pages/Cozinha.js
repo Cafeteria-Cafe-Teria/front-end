@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './Cozinha.css';
 import logo from '../assets/LOGO.svg';
 import PedidosBox from '../components/PedidosBox';
-import WelcomeButton from '../components/WelcomeButton';
 
 const Cozinha = () => {
   const [activeStatus, setActiveStatus] = useState('recebido');
@@ -89,27 +88,15 @@ const Cozinha = () => {
 
       {/* Botões de Navegação */}
       <div className="status-navigation">
-        {Object.keys(statusLabels).map((status) => {
-          const count = pedidos[status].length;
-          const displayText = `${statusLabels[status]} (${count})`;
-          
-          return (
-            <WelcomeButton
-              key={status}
-              type="botao4"
-              text={displayText}
-              width={200}
-              height={80}
-              onClick={() => setActiveStatus(status)}
-              className={activeStatus === status ? 'active-status' : ''}
-              style={{
-                opacity: activeStatus === status ? 1 : 0.7,
-                transform: activeStatus === status ? 'scale(1.05)' : 'scale(1)',
-                filter: activeStatus === status ? 'brightness(1.1)' : 'brightness(0.9)'
-              }}
-            />
-          );
-        })}
+        {Object.keys(statusLabels).map((status) => (
+          <button
+            key={status}
+            className={`status-button ${activeStatus === status ? 'active' : ''}`}
+            onClick={() => setActiveStatus(status)}
+          >
+            {statusLabels[status]}
+          </button>
+        ))}
       </div>
     </div>
   );
