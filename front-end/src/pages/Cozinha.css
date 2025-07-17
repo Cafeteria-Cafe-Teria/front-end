@@ -133,7 +133,7 @@
   background-size:contain;
   border: none;
   color: #780A01; /* Cor marrom escura para contraste com o caixa3.svg */
-  padding: 15px 20px;
+  padding: 40px 20px;
   font-family: 'Pixelify Sans', 'PixelSans', monospace;
   font-size: 14px;
   font-weight: 600;
@@ -141,9 +141,9 @@
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
+  margin: 3px;
   flex-direction: column;
-  gap: 6px;
-  width: 90px;
+  width: 80px;
   text-align: center;
 }
 
@@ -153,7 +153,7 @@
 }
 
 .status-button.active {
-  transform: translateY(-2px);
+  
   filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0,0,0,0.4));
 }
 

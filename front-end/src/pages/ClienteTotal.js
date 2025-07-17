@@ -117,7 +117,7 @@ const ClienteTotal = () => {
             const nomeBebida = bebidaArr
               .filter(item => item.preco !== undefined && item.preco !== null)
               .map(item => item.nome)
-              .join(' com ');
+              .join(' ');
             const precoBebida = bebidaArr
               .reduce((acc, item) => acc + (typeof item.preco === 'number' ? item.preco : 0), 0);
             return (
