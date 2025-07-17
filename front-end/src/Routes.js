@@ -26,7 +26,7 @@ const AppRoutes = () => {
       <Route path="/cliente/:uuid/pagamento" element={<ClientePagamento />} />
       <Route path="/cliente/status/:uuid" element={<ClienteStatusFinal />} />
       <Route path="/cozinha" element={<CozinhaWelcome />} />
-      <Route path="/cozinha/dashboard" element={<Cozinha />} />
+      <Route path="/cozinha/pedidos" element={<Cozinha />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
