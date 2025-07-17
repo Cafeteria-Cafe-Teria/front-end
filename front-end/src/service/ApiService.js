@@ -1,6 +1,7 @@
 const API_BASE_URL = 'http://localhost:8000'; // Ajuste conforme necessário
 
 class ApiService {
+  
   // Métodos do Cliente
   async criarPedido() {
     try {
@@ -206,7 +207,7 @@ class ApiService {
   }
 
   // WebSocket para cozinha
- conectarWebSocketCozinha(onMessage) {
+  conectarWebSocketCozinha(onMessage) {
     const ws = new WebSocket(`ws://localhost:8000/ws`);
     
     ws.onopen = () => {
@@ -214,12 +215,8 @@ class ApiService {
     };
     
     ws.onmessage = (event) => {
-      try {
-        const data = JSON.parse(event.data);
-        onMessage(data);
-      } catch (e) {
-        console.error('Erro ao processar mensagem WebSocket cozinha:', e, event.data);
-      }
+      const data = JSON.parse(event.data);
+      onMessage(data);
     };
     
     ws.onerror = (error) => {
@@ -234,5 +231,4 @@ class ApiService {
   }
 }
 
-const apiService = new ApiService();
-export default apiService;
+export default new ApiService();

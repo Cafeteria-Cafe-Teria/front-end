@@ -42,15 +42,13 @@ const ClienteTotal = () => {
     // eslint-disable-next-line
   }, [navigate]);
 
-  // Remove bebida pelo índice
-  const handleRemoverBebida = async (idx) => {
+  // Remove bebida pelo id real
+  const handleRemoverBebida = async (idBebida) => {
     const pedidoUuid = localStorage.getItem('pedidoUuid');
     if (!pedidoUuid || !pedido || !pedido.bebidas) return;
-    // A API espera o id ou índice da bebida para remover
     try {
       setLoading(true);
-      // Se a API espera um id, troque idx por pedido.bebidas[idx].id
-      await ApiService.removerBebida(pedidoUuid, idx);
+      await ApiService.removerBebida(pedidoUuid, idBebida);
       await fetchPedido();
     } catch {
       alert('Erro ao remover bebida!');
@@ -58,10 +56,28 @@ const ClienteTotal = () => {
     }
   };
 
+  // Edita bebida pelo id real
+  const handleEditarBebida = (idBebida) => {
+    navigate(`/cliente/${uuid}/bebida/adicionais`, { state: { bebidaId: idBebida } });
+  };
+
+  // Atualiza bebida usando a nova rota correta
+  const atualizarBebida = async (idBebida, bebida) => {
+    const pedidoUuid = uuid || localStorage.getItem('pedidoUuid');
+    if (!pedidoUuid) return;
+    try {
+      setLoading(true);
+      await ApiService.atualizarBebidaEmPedido(pedidoUuid, idBebida, bebida);
+      await fetchPedido();
+    } catch {
+      alert('Erro ao atualizar bebida!');
+      setLoading(false);
+    }
+  };
+
   // Monta lista de bebidas (compatível com estrutura da sua API)
   const getBebidasList = () => {
     if (!pedido || !pedido.bebidas) return [];
-    // Caso a API retorne um objeto numerado (ex: { "0": [ ... ], "1": [ ... ] })
     if (!Array.isArray(pedido.bebidas)) {
       return Object.values(pedido.bebidas);
     }
@@ -113,16 +129,18 @@ const ClienteTotal = () => {
           position: 'relative'
         }}>
           {bebidasList.length > 0 ? bebidasList.map((bebidaArr, idx) => {
-            // Cada bebidaArr é um array de objetos [{nome, preco}, ...]
+            // Cada bebidaArr é um array de objetos [{nome, preco, id}, ...]
             const nomeBebida = bebidaArr
               .filter(item => item.preco !== undefined && item.preco !== null)
               .map(item => item.nome)
               .join(' ');
             const precoBebida = bebidaArr
               .reduce((acc, item) => acc + (typeof item.preco === 'number' ? item.preco : 0), 0);
+            const idBebida = bebidaArr[0]?.id ?? idx; // Use sempre o id real
+
             return (
               <div
-                key={idx}
+                key={idBebida}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -140,10 +158,11 @@ const ClienteTotal = () => {
                     color: '#5F2D29',
                     textAlign: 'left',
                     maxWidth: 180,
-                    wordBreak: 'break-word'
+                    wordBreak: 'break-word',
+                    textDecoration: 'underline'
                   }}
-                  onClick={() => navigate(`/cliente/${uuid}/bebida/adicionais`, { state: { bebidaIdx: idx } })}
-                  title="Clique para alterar"
+                  onClick={() => handleEditarBebida(idBebida)}
+                  title="Clique para editar"
                 >
                   {nomeBebida}
                 </span>
@@ -151,7 +170,7 @@ const ClienteTotal = () => {
                   {precoBebida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                 </span>
                 <button
-                  onClick={() => handleRemoverBebida(idx)}
+                  onClick={() => handleRemoverBebida(idBebida)}
                   style={{
                     background: 'none',
                     border: 'none',
@@ -179,7 +198,8 @@ const ClienteTotal = () => {
             fontSize: 16,
             margin: '18px 0 0 0'
           }}>
-            Para alterar um item, clique no nome do item
+            Para <b>editar</b> um item, clique no nome.<br />
+            Para <b>remover</b>, clique no "×".
           </div>
         </div>
         <div style={{
