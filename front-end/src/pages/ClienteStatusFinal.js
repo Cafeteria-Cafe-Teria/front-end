@@ -5,11 +5,12 @@ import logo from '../assets/LOGO.svg';
 import WelcomeButton from '../components/WelcomeButton';
 import './ClienteWelcome.css';
 
+// Mapear os status do backend 
 const statusLabels = {
-  recebido: 'Pedido recebido',
-  preparando: 'Preparando...',
-  pronto: 'Pronto para retirar!',
-  entregue: 'Pedido entregue'
+  'Recebido': 'Pedido recebido',
+  'Em preparo': 'Preparando...',
+  'Pronto': 'Pronto para retirar!',
+  'Entregue': 'Pedido entregue'
 };
 
 const ClienteStatusFinal = () => {
@@ -21,8 +22,8 @@ const ClienteStatusFinal = () => {
   useEffect(() => {
     let ws;
     let ignore = false;
-    const statusFinalizados = ['entregue', 'cancelado'];
-    const statusPermitidos = ['recebido', 'em_preparo', 'pronto', 'entregue'];
+    const statusFinalizados = ['Entregue', 'Cancelado'];
+    const statusPermitidos = ['Recebido', 'Em preparo', 'Pronto', 'Entregue'];
 
     const buscarStatusInicial = async () => {
       if (!uuid) {
@@ -30,31 +31,39 @@ const ClienteStatusFinal = () => {
         return;
       }
       try {
-        // Buscar status inicial do pedido (pode ser por pegarTodosOsPedidos ou outro endpoint)
+        // Buscar status inicial do pedido
         const pedidos = await ApiService.pegarTodosOsPedidos();
         const pedido = Array.isArray(pedidos)
           ? pedidos.find(p => (p.uuid || p.id) === uuid)
           : null;
+        
         if (!pedido || !pedido.status) {
           setErro('Pedido não encontrado.');
           return;
         }
-        const statusAtual = (pedido.status || '').toLowerCase();
+        
+        const statusAtual = pedido.status; // Usar status exato do backend
         if (!statusPermitidos.includes(statusAtual)) {
           setErro('Aguardando início do pedido...');
           return;
         }
+        
         setStatus(statusAtual);
+        
         // Se status for finalizado/cancelado, não conecta WebSocket
         if (statusFinalizados.includes(statusAtual)) {
           return;
         }
-        // Conectar WebSocket para atualizações em tempo real
-        ws = ApiService.conectarWebSocketCliente(uuid, (msg) => {
-          if (msg.status && !ignore) {
-            const novoStatus = (msg.status || '').toLowerCase();
-            if (statusPermitidos.includes(novoStatus)) {
-              setStatus(novoStatus);
+        
+    
+        ws = ApiService.conectarWebSocketCozinha((msg) => {
+          if (msg && msg.uuid && msg.status && !ignore) {
+            // Verificar se a mensagem é do pedido específico
+            if ((msg.uuid || msg.id) === uuid) {
+              const novoStatus = msg.status;
+              if (statusPermitidos.includes(novoStatus)) {
+                setStatus(novoStatus);
+              }
             }
           }
         });
@@ -62,7 +71,9 @@ const ClienteStatusFinal = () => {
         setErro('Erro ao buscar status do pedido.');
       }
     };
+
     buscarStatusInicial();
+    
     return () => {
       ignore = true;
       if (ws && ws.close) ws.close();

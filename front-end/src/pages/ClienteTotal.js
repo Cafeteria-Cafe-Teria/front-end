@@ -57,23 +57,23 @@ const ClienteTotal = () => {
   };
 
   // Edita bebida pelo id real
-  const handleEditarBebida = (idBebida) => {
-    navigate(`/cliente/${uuid}/bebida/adicionais`, { state: { bebidaId: idBebida } });
-  };
+  // const handleEditarBebida = (idBebida) => {
+  //   navigate(`/cliente/${uuid}/bebida/adicionais`, { state: { bebidaId: idBebida } });
+  // };
 
   // Atualiza bebida usando a nova rota correta
-  const atualizarBebida = async (idBebida, bebida) => {
-    const pedidoUuid = uuid || localStorage.getItem('pedidoUuid');
-    if (!pedidoUuid) return;
-    try {
-      setLoading(true);
-      await ApiService.atualizarBebidaEmPedido(pedidoUuid, idBebida, bebida);
-      await fetchPedido();
-    } catch {
-      alert('Erro ao atualizar bebida!');
-      setLoading(false);
-    }
-  };
+  // const atualizarBebida = async (idBebida, bebida) => {
+  //   const pedidoUuid = uuid || localStorage.getItem('pedidoUuid');
+  //   if (!pedidoUuid) return;
+  //   try {
+  //     setLoading(true);
+  //     await ApiService.atualizarBebidaEmPedido(pedidoUuid, idBebida, bebida);
+  //     await fetchPedido();
+  //   } catch {
+  //     alert('Erro ao atualizar bebida!');
+  //     setLoading(false);
+  //   }
+  // };
 
   // Monta lista de bebidas (compatível com estrutura da sua API)
   const getBebidasList = () => {
@@ -154,15 +154,15 @@ const ClienteTotal = () => {
               >
                 <span
                   style={{
-                    cursor: 'pointer',
                     color: '#5F2D29',
                     textAlign: 'left',
                     maxWidth: 180,
-                    wordBreak: 'break-word',
-                    textDecoration: 'underline'
+                    wordBreak: 'break-word'
+                    // Remover: cursor: 'pointer',
+                    // Remover: textDecoration: 'underline'
                   }}
-                  onClick={() => handleEditarBebida(idBebida)}
-                  title="Clique para editar"
+                  // Remover: onClick={() => handleEditarBebida(idBebida)}
+                  // Remover: title="Clique para editar"
                 >
                   {nomeBebida}
                 </span>
@@ -198,7 +198,6 @@ const ClienteTotal = () => {
             fontSize: 16,
             margin: '18px 0 0 0'
           }}>
-            Para <b>editar</b> um item, clique no nome.<br />
             Para <b>remover</b>, clique no "×".
           </div>
         </div>

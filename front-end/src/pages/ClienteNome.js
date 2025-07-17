@@ -86,7 +86,7 @@ const ClienteNome = () => {
             onClick={() => {
               localStorage.removeItem('tipoBebida');
               localStorage.removeItem('bebidaId');
-              navigate(`/cliente/${uuid}/bebida`);
+              navigate(`/cliente/${uuid}/total`);
             }}
           />
           <WelcomeButton
