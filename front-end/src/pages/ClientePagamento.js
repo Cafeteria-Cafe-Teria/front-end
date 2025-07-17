@@ -20,9 +20,7 @@ const ClientePagamento = () => {
       if (!pedidoUuid) return;
       try {
         let dados;
-        // Sempre busca pela rota de método de pagamento, inclusive para "Cartão"
         if (pagamentoSelecionado) {
-          // Os valores devem ser exatamente: 'Pix', 'Cartão' ou 'Cartão Fidelidade'
           dados = await ApiService.simularNotaComPagamento(pedidoUuid, pagamentoSelecionado);
         } else {
           dados = await ApiService.gerarNotaDePedido(pedidoUuid);
@@ -46,9 +44,8 @@ const ClientePagamento = () => {
       }
     };
     fetchTotal();
-  }, [pagamentoSelecionado]);
+  }, [pagamentoSelecionado, uuid]);
 
-  // Os valores devem ser exatamente como a API espera:
   const opcoes = [
     { label: 'Cartão Fidelidade', desconto: '10% de desconto', value: 'Cartão Fidelidade' },
     { label: 'Pix', desconto: '5% de desconto', value: 'Pix' },
@@ -61,7 +58,10 @@ const ClientePagamento = () => {
       return;
     }
     try {
-      const pedidoUuid = localStorage.getItem('pedidoUuid');
+      const pedidoUuid = uuid || localStorage.getItem('pedidoUuid');
+      // Envia o pedido para o backend (muda status para "Recebido")
+      await ApiService.enviarPedido(pedidoUuid);
+      // Finaliza o pagamento se necessário
       if (ApiService.finalizarPagamento) {
         await ApiService.finalizarPagamento(pedidoUuid, pagamentoSelecionado);
       }
@@ -159,7 +159,6 @@ const ClientePagamento = () => {
           justifyContent: 'space-between',
           }}
           >
-            {/* Se houver desconto, mostra riscado e o novo valor */}
             {precoFinal && precoFinal !== precoTotal ? (
               <>
                 <span style={{ color: '#ffececff' }}>{precoFinal}</span>

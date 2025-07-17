@@ -22,7 +22,7 @@ const ClienteStatusFinal = () => {
     let ws;
     let ignore = false;
     const statusFinalizados = ['entregue', 'cancelado'];
-    const statusPermitidos = ['recebido', 'preparando', 'pronto', 'entregue'];
+    const statusPermitidos = ['recebido', 'em_preparo', 'pronto', 'entregue'];
 
     const buscarStatusInicial = async () => {
       if (!uuid) {

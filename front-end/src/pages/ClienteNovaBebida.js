@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import WelcomeButton from '../components/WelcomeButton';
-import ApiService from '../service/ApiService';
 import logo from '../assets/LOGO.svg';
 import './ClienteWelcome.css';
 
@@ -16,7 +15,6 @@ const ClienteNovaBebida = () => {
       return;
     }
     try {
-      await ApiService.enviarPedido(pedidoUuid);
       // Limpa o localStorage para evitar adicionar bebida em pedido já finalizado
       localStorage.removeItem('tipoBebida');
       localStorage.removeItem('bebidaId');
