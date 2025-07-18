@@ -160,7 +160,7 @@ const ClienteAdicionarBebida = () => {
         <WelcomeButton
           type="botao1"
           text="Café"
-          textPrice="R$ 4,50"
+          textPrice="R$ 4,00"
           icon="coffee"
           iconSize={40}
           width={230}
