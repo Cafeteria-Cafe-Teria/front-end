@@ -89,54 +89,60 @@ const ClientePagamento = () => {
           alignItems: 'center',
           width: '100%',
         }}>
-          {opcoes.map(opcao => (
-            <WelcomeButton
-              key={opcao.value}
-              type="caixa"
-              width={300}
-              height={100}
-              onClick={() => setPagamentoSelecionado(opcao.value)}
-              disabled={!precoTotal || precoTotal === 'R$ 0,00'}
-              style={{
-                padding: 0,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-start'
-              }}
-              text={
-                <div style={{
-                  width: '100%',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '0 32px',
-                  fontSize: 18,
-                  fontWeight: 700
-                }}>
-                  <span style={{ textAlign: 'left', lineHeight: 1.2 }}>
-                    {opcao.label.split(' ').map((word, idx, arr) =>
-                      arr.length > 1 && idx === 0 ? (
-                        <React.Fragment key={idx}>
-                          {word}
-                          <br />
-                        </React.Fragment>
-                      ) : (
-                        <React.Fragment key={idx}>
-                          {idx > 0 ? ' ' : ''}
-                          {word}
-                        </React.Fragment>
-                      )
-                    )}
-                  </span>
-                  <span style={{
-                    textAlign: 'right',
-                    fontSize: 18,
-                    fontWeight: 500,
-                    color: '#5F2D29'
-                  }}>
-                    {opcao.desconto}
-                  </span>
+{opcoes.map(opcao => (
+  <WelcomeButton
+    key={opcao.value}
+    type="caixa"
+    width={300}
+    height={100}
+    onClick={() => setPagamentoSelecionado(opcao.value)}
+    disabled={!precoTotal || precoTotal === 'R$ 0,00'}
+    style={{
+      padding: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-start'
+    }}
+    text={
+      <div style={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0 32px',
+        fontSize: 20,
+        fontWeight: 700
+      }}>
+        <span style={{
+          textAlign: 'left',
+          lineHeight: 1.2,
+          fontSize: 20,
+          fontWeight: 700
+        }}>
+          {opcao.label.split(' ').map((word, idx, arr) =>
+            arr.length > 1 && idx === 0 ? (
+              <React.Fragment key={idx}>
+                {word}
+                <br />
+              </React.Fragment>
+            ) : (
+              <React.Fragment key={idx}>
+                {idx > 0 ? ' ' : ''}
+                {word}
+              </React.Fragment>
+            )
+          )}
+        </span>
+        <span style={{
+          textAlign: 'right',
+          fontSize: 18,
+          fontWeight: 700,
+          color: '#5F2D29',
+          marginLeft: 25
+        }}>
+          {opcao.desconto}
+        </span>
                 </div>
               }
             />
