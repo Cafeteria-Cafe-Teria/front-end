@@ -98,7 +98,7 @@ const ClienteStatusFinal = () => {
 return (
     <div className="cliente-welcome-container">
       <span className="cliente-adicionais-title" style={{ fontSize: 30, marginBottom: 0 }}>
-      Agradecemos à sua compra!
+      Agradecemos a sua compra!
       </span>
       <img src={logo} alt="Logo do Restaurante" className="cliente-welcome-logo" />
       <div style={{

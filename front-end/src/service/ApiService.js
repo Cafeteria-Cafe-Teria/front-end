@@ -208,27 +208,43 @@ class ApiService {
 
   // WebSocket para cozinha
   conectarWebSocketCozinha(onMessage) {
-    const ws = new WebSocket(`ws://localhost:8000/ws`);
-    
+  let ws;
+  let reconnectAttempts = 0;
+  const maxAttempts = 10;
+
+  function connect() {
+    ws = new WebSocket(`ws://localhost:8000/ws`);
+
     ws.onopen = () => {
+      reconnectAttempts = 0;
       console.log('WebSocket cozinha conectado');
     };
-    
+
     ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      onMessage(data);
+      try {
+        const data = JSON.parse(event.data);
+        onMessage(data);
+      } catch (e) {
+        console.error('Erro ao processar mensagem WebSocket:', e);
+      }
     };
-    
+
     ws.onerror = (error) => {
       console.error('Erro WebSocket cozinha:', error);
     };
-    
+
     ws.onclose = () => {
       console.log('WebSocket cozinha desconectado');
+      if (reconnectAttempts < maxAttempts) {
+        reconnectAttempts++;
+        setTimeout(connect, 1000 * reconnectAttempts); // backoff exponencial simples
+      }
     };
-    
-    return ws;
   }
+
+  connect();
+  return ws;
+}
 }
 
 export default new ApiService();
